@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
+<head>
+<meta charset="UTF-8" />
+<title>Error 500</title>
+<style type="text/css">
+	body{
+		text-align: center;
+	}
+</style>
+</head>
+<body>
+	<h1>Error 500</h1>
+	<p th:text="${error}"></p>
+	<p th:text="${status}"></p>
+	<p th:text="${timestamp}"></p>
+	<hr>
+	<p th:text="${path}"></p>
+	<img th:src="@{../../imagenes/500.png}">
+</body>
+</html>

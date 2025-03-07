@@ -1,0 +1,110 @@
+.pagina-body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f7fafc;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+}
+
+.contenedor {
+    width: 100%;
+    max-width: 500px;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.titulo {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #2d3748;
+    font-size: 24px;
+}
+
+.formulario {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.campo-grupo {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.campo-grupo label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #4a5568;
+}
+
+.campo {
+    padding: 10px;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #2d3748;
+    background-color: #f8fafc;
+    transition: border-color 0.2s ease;
+}
+
+.campo:focus {
+    border-color: #4299e1;
+    outline: none;
+}
+
+.botones-grupo {
+    display: flex;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.boton {
+    flex: 1;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    font-size: 16px;
+}
+
+.guardar {
+    background-color: #4299e1;
+    color: white;
+}
+
+.guardar:hover {
+    background-color: #3182ce;
+}
+
+.cancelar {
+    background-color: #e2e8f0;
+    color: #4a5568;
+}
+
+.cancelar:hover {
+    background-color: #cbd5e0;
+}
+
+.mensaje {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.exito {
+    background-color: #c6f6d5;
+    color: #2f855a;
+}
+
+.error {
+    background-color: #fed7d7;
+    color: #c53030;
+}

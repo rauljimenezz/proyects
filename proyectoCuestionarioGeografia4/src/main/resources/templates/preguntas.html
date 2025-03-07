@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Lista de Preguntas')}">
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 th:text="${typeTitle}"></h1>
+        
+        <div class="mb-4">
+            <form method="get" th:action="@{/preguntas/{type}(type=${questionType})}">
+                <div class="row">
+                    <div class="col-6">
+                        <label class="form-label">Filtrar por categoría</label>
+                        <select name="categoria" class="form-control" th:value="${param.categoria}">
+                            <option value="">Seleccione una categoría</option>
+                            <th:block th:each="cat : ${categorias}">
+                                <option th:value="${cat.id}" th:text="${cat.nombre}">
+                                </option>
+                            </th:block>
+                        </select>
+                    </div>
+                    <div class="col-6">
+                        <button type="submit" class="btn btn-primary mt-4">Filtrar</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        
+        <div class="list-group mb-4">
+            <div th:each="pregunta : ${preguntas}" class="list-group-item">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div>
+                        <h5 th:text="${pregunta.enunciado}"></h5>
+                        <p><strong>Categoría:</strong> <span th:text="${pregunta.categoria.nombre}"></span></p>
+                    </div>
+                    <div>
+                        <a th:href="@{/preguntas/edit/{id}(id=${pregunta.id})}" class="btn btn-primary btn-sm me-2">Editar</a>
+                        <a th:href="@{/preguntas/delete/{id}(id=${pregunta.id})}" class="btn btn-danger btn-sm"
+                           onclick="return confirm('¿Estás seguro de que deseas eliminar esta pregunta?')">Eliminar</a>
+                    </div>
+                </div>
+                <div class="mt-2">
+                    <div th:each="opcion : ${pregunta.opciones}" class="ms-3">
+                        <span th:text="${opcion.opciones}"></span>
+                        <span th:if="${opcion.esCorrecta}" class="text-success">(Correcta)</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-between align-items-center mt-4">
+            <a th:if="${currentPage > 0}" th:href="@{/preguntas/{type}(type=${questionType}, page=${currentPage - 1}, size=5, categoria=${param.categoria})}" class="btn btn-secondary">Anterior</a>
+            <span>Página <span th:text="${currentPage + 1}"></span> de <span th:text="${totalPages}"></span></span>
+            <a th:if="${currentPage < totalPages - 1}" th:href="@{/preguntas/{type}(type=${questionType}, page=${currentPage + 1}, size=5, categoria=${param.categoria})}" class="btn btn-secondary">Siguiente</a>
+        </div>
+
+        <form th:action="@{/preguntas/create}" method="post" class="card p-3 mt-4">
+            <h3>Nueva Pregunta</h3>
+            <input type="hidden" name="type" th:value="${questionType}">
+
+            <div class="mb-3">
+                <label class="form-label">Pregunta:</label>
+                <input type="text" name="enunciado" class="form-control" required>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Categoría:</label>
+				<select name="categoria" class="form-control" required>
+				    <option value="">Seleccione una categoría</option>
+				    <option th:each="cat : ${categorias}" 
+				            th:value="${cat.id}" 
+				            th:text="${cat.nombre}">
+				    </option>
+				</select>
+            </div>
+
+            <th:block th:if="${questionType.name() == 'VERDADERO_FALSO'}">
+                <input type="hidden" name="options" value="Verdadero,Falso">
+                <div class="mb-3">
+                    <label class="form-label">Respuesta correcta:</label>
+                    <select name="correct" class="form-control" required>
+                        <option value="0">Verdadero</option>
+                        <option value="1">Falso</option>
+                    </select>
+                </div>
+            </th:block>
+
+            <th:block th:if="${questionType.name() == 'OPCION_UNICA' || questionType.name() == 'OPCION_MULTIPLE'}">
+                <div class="mb-3">
+                    <label class="form-label">Opciones separadas por comas:</label>
+                    <input type="text" name="options" class="form-control" placeholder="Opción 1, Opción 2, Opción 3..." required>
+                    <small class="form-text text-muted">Escriba las opciones separadas por comas</small>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Índices de respuestas correctas:</label>
+                    <input type="text" name="correct" class="form-control" th:placeholder="${questionType.name() == 'OPCION_UNICA' ? '0' : '0,1'}" required>
+                    <small class="form-text text-muted">
+                        Para opción única: ingrese un número (0, 1, 2...)
+                        <br th:if="${questionType.name() == 'OPCION_MULTIPLE'}">
+                        <span th:if="${questionType.name() == 'OPCION_MULTIPLE'}">
+                            Para opción múltiple: ingrese los números separados por comas (0,1,2...)
+                        </span>
+                    </small>
+                </div>
+            </th:block>
+
+            <div class="d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Crear Pregunta</button>
+            </div>
+        </form>
+
+        <div class="mt-3">
+            <div th:replace="~{fragments :: boton-volver}"></div>
+        </div>
+    </div>
+
+    <th:block th:replace="~{fragments :: scripts}"></th:block>
+</body>
+</html>

@@ -1,0 +1,20 @@
+@charset "UTF-8";
+body{
+	text-align: center;
+}
+
+.botones a{
+    display: block;
+    margin: 10px;
+    padding: 15px 25px;
+    font-size: 20px;
+    color: white;
+    text-decoration: none;
+    border-radius: 18px;
+    background-color: #00a6ff;
+    transition: background-color 0.5s ease;
+}
+
+.botones a:hover{
+    background-color: #0056b3;
+}

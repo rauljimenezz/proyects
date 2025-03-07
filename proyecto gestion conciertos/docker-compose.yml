@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  db:
+    image: mysql:5.7
+    container_name: mysql_db
+    environment:
+      MYSQL_ROOT_PASSWORD: 30092004rjgDd?
+      MYSQL_DATABASE: gestion_conciertos
+      MYSQL_PASSWORD: 30092004rjgDd?
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p30092004rjgDd?"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./trabajofc2
+    container_name: spring_backend
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://db:3306/gestion_conciertos
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 30092004rjgDd?
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+
+  frontend:
+    build: ./frontend
+    container_name: react_frontend
+    ports:
+      - "5173:5173"
+    depends_on:
+      - backend
+    stdin_open: true
+    tty: true
+    environment:
+      - VITE_API_URL=http://localhost:8080
+
+volumes:
+  mysql_data:

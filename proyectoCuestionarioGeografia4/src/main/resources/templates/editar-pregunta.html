@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Formulario de Pregunta</title>
+<link href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container mt-5">
+		<h1 th:text="${pregunta.id != null ? 'Editar Pregunta' : 'Nueva Pregunta'}"></h1>
+
+		<form th:action="${pregunta.id != null ? '/preguntas/edit/' + pregunta.id : '/preguntas/create'}" method="post">
+
+			<h3>Nueva Pregunta</h3>
+			<input type="hidden" name="type" th:value="${questionType}">
+
+			<div class="mb-3">
+				<label>Pregunta:</label> <input type="text" name="enunciado" class="form-control" th:value="${pregunta.enunciado}" required>
+			</div>
+
+			<div class="mb-3">
+				<label>Categoría:</label> <select name="categoria" class="form-control" required>
+					<option value="">Seleccione una categoría</option>
+					<option th:each="cat : ${categorias}" th:value="${cat.id}"
+						th:text="${cat.nombre}" th:selected="${pregunta != null and pregunta.categoria.id == cat.id}">
+					</option>
+				</select>
+			</div>
+
+			<th:block th:if="${questionType.name() == 'VERDADERO_FALSO'}">
+				<input type="hidden" name="options" value="Verdadero,Falso">
+				<div class="mb-3">
+					<label>Respuesta correcta:</label> <select name="correct" class="form-control">
+						<option value="0" th:selected="${correctString == '0'}">Verdadero</option>
+						<option value="1" th:selected="${correctString == '1'}">Falso</option>
+					</select>
+				</div>
+			</th:block>
+
+			<th:block th:if="${questionType.name() == 'OPCION_UNICA'}">
+				<div class="mb-3">
+					<label>Opciones separadas por comas:</label> <input type="text" name="options" class="form-control" th:value="${optionsString}" required>
+				</div>
+				<div class="mb-3">
+					<label>Índice de la respuesta correcta (0, 1, 2, 3):</label> <input type="text" name="correct" class="form-control" th:value="${correctString}" required>
+				</div>
+			</th:block>
+
+			<th:block th:if="${questionType.name() == 'OPCION_MULTIPLE'}">
+				<div class="mb-3">
+					<label>Opciones separadas por comas:</label> <input type="text" name="options" class="form-control" th:value="${optionsString}" required>
+				</div>
+				<div class="mb-3">
+					<label>Índices de las respuestas correctas (ejemplo: 0,1):</label>
+					<input type="text" name="correct" class="form-control" th:value="${correctString}" required>
+				</div>
+			</th:block>
+
+			<div class="d-flex gap-2">
+				<button type="submit" class="btn btn-primary">Guardar cambios</button>
+				<a th:href="@{/preguntas/{type}(type=${questionType})}" class="btn btn-secondary">Cancelar</a>
+			</div>
+		</form>
+	</div>
+
+	<script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

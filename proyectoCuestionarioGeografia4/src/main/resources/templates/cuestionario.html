@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments :: head('Cuestionario')}">
+<body>
+    <div class="container mt-5">
+        <h1 class="mb-4">Cuestionario</h1>
+        
+        <form action="/submit" method="post">
+            <div th:each="pregunta, stat : ${questions}" class="card mb-4">
+                <div class="card-header">
+                    <h5 th:text="${pregunta.enunciado}"></h5>
+                </div>
+                <div class="card-body">
+                    <div th:if="${pregunta.type.name() == 'VERDADERO_FALSO'}" class="form-check">
+                        <div th:each="opcion : ${pregunta.opciones}" class="mb-2">
+                            <input type="radio" 
+                                   th:name="'pregunta_' + ${pregunta.id}"
+                                   th:value="${opcion.opciones == 'Verdadero'}"
+                                   class="form-check-input">
+                            <label class="form-check-label" th:text="${opcion.opciones}"></label>
+                        </div>
+                    </div>
+                    
+                    <div th:if="${pregunta.type.name() == 'OPCION_UNICA'}" class="form-check">
+                        <div th:each="opcion : ${pregunta.opciones}" class="mb-2">
+                            <input type="radio" 
+                                   th:name="'pregunta_' + ${pregunta.id}"
+                                   th:value="${opcion.id}"
+                                   class="form-check-input">
+                            <label class="form-check-label" th:text="${opcion.opciones}"></label>
+                        </div>
+                    </div>
+                    
+                    <div th:if="${pregunta.type.name() == 'OPCION_MULTIPLE'}" class="form-check">
+                        <div th:each="opcion : ${pregunta.opciones}" class="mb-2">
+                            <input type="checkbox" 
+                                   th:name="'pregunta_' + ${pregunta.id}"
+                                   th:value="${opcion.id}"
+                                   class="form-check-input">
+                            <label class="form-check-label" th:text="${opcion.opciones}"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    Página <span th:text="${currentPage + 1}"></span> de <span th:text="${totalPages}"></span>
+                </div>
+                <div>
+                    <a th:if="${currentPage > 0}" 
+                       th:href="@{/quiz(page=${currentPage - 1})}" 
+                       class="btn btn-secondary me-2">Anterior</a>
+                       
+                    <a th:if="${currentPage < totalPages - 1}" 
+                       th:href="@{/quiz(page=${currentPage + 1})}" 
+                       class="btn btn-secondary">Siguiente</a>
+                </div>
+            </div>
+            
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Enviar respuestas</button>
+            </div>
+        </form>
+        
+        <div th:replace="~{fragments :: boton-volver}"></div>
+    </div>
+    
+    <th:block th:replace="~{fragments :: scripts}"></th:block>
+</body>
+</html>

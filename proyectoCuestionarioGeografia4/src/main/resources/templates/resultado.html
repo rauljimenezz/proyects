@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Resultados del Cuestionario</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="card">
+            <div class="card-header">
+                <h2>Resultados del cuestionario</h2>
+            </div>
+            <div class="card-body">
+                <h3 th:text="${score == 1 ? 'Has acertado 1 pregunta' : 'Has acertado ' + score + ' preguntas'}"></h3>
+                <a href="/quiz" class="btn btn-primary">Volver a intentar</a>
+            </div>
+        </div>
+        <button class="btn btn-back"><a href="/home">Volver</a></button>
+    </div>
+    
+    <script src="/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

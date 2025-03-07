@@ -1,0 +1,479 @@
+.dashboard-container {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f9;
+  color: #333;
+}
+
+.dashboard-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 15px;
+  border-bottom: 2px solid #ccc;
+  background-color: #1a202c;
+  color: white;
+}
+
+.dashboard-header h1 {
+  font-size: 26px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.user-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.edit-profile-btn,
+.logout-btn {
+  padding: 10px 18px;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.edit-profile-btn {
+  background-color: #3182ce;
+  color: white;
+  border: none;
+}
+
+.edit-profile-btn:hover {
+  background-color: #2b6cb0;
+}
+
+.logout-btn {
+  background-color: #e53e3e;
+  color: white;
+  border: none;
+}
+
+.logout-btn:hover {
+  background-color: #c53030;
+}
+
+.dashboard-content {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+.conciertos-section h2 {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #2d3748;
+  text-align: center;
+}
+
+.loading-container,
+.error-container,
+.empty-container {
+  padding: 20px;
+  text-align: center;
+  background-color: #fff5f5;
+  border-radius: 8px;
+  font-weight: bold;
+}
+
+.conciertos-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 25px;
+}
+
+.concierto-card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.concierto-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.concierto-card h3 {
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #1a202c;
+}
+
+.concierto-description {
+  color: #555;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.concierto-details {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.concierto-date,
+.concierto-price {
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #2c5282;
+}
+
+.concierto-status {
+  margin-bottom: 15px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #e2e8f0;
+  color: #1a202c;
+}
+
+.comprar-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #48bb78;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 16px;
+}
+
+.comprar-btn:hover {
+  background-color: #38a169;
+}
+
+
+.admin-section {
+  margin-bottom: 30px;
+  padding: 15px;
+  background-color: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.admin-section-title {
+  font-size: 22px;
+  margin-bottom: 20px;
+  color: #2d3748;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.admin-cards-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.admin-card {
+  padding: 20px;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  border: 1px solid #e2e8f0;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.admin-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-color: #cbd5e0;
+}
+
+.admin-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #3182ce;
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.admin-card-description {
+  color: #4a5568;
+  margin-bottom: 20px;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.admin-card-button {
+  width: 100%;
+  padding: 10px 15px;
+  background-color: #3182ce;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.admin-card-button:hover {
+  background-color: #2c5282;
+}
+
+.entradas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 25px;
+  margin-top: 20px;
+}
+
+.entrada-card {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.entrada-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.entrada-card h3 {
+  font-size: 20px;
+  margin-top: 0;
+  margin-bottom: 10px;
+  color: #1a202c;
+}
+
+.entrada-details {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.entrada-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.entrada-label {
+  font-weight: 600;
+  color: #4a5568;
+}
+
+.entrada-value {
+  font-weight: 600;
+  color: #2c5282;
+}
+
+.entrada-status {
+  margin-top: 10px;
+  margin-bottom: 15px;
+}
+
+.entrada-status-badge {
+  display: inline-block;
+  padding: 6px 10px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: 600;
+  background-color: #e2e8f0;
+  color: #1a202c;
+}
+
+.entrada-status-badge.usado {
+  background-color: #fed7d7;
+  color: #c53030;
+}
+
+.entrada-status-badge.activo {
+  background-color: #c6f6d5;
+  color: #2f855a;
+}
+
+.entrada-actions {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+}
+
+.entrada-btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 6px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-align: center;
+  font-size: 14px;
+  border: none;
+}
+
+.entrada-btn-primary {
+  background-color: #3182ce;
+  color: white;
+}
+
+.entrada-btn-primary:hover {
+  background-color: #2b6cb0;
+}
+
+.entrada-btn-secondary {
+  background-color: #4a5568;
+  color: white;
+}
+
+
+.entrada-card .comprar-entrada-container {
+  margin-top: 15px;
+}
+
+.entrada-card .comprar-btn {
+  width: 100%;
+}
+
+.devolver-btn, .eliminar-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.devolver-btn {
+  background-color: #ffa500;
+  color: white;
+}
+
+.devolver-btn:hover {
+  background-color: #e69500;
+}
+
+.eliminar-btn {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.eliminar-btn:hover {
+  background-color: #e60000;
+}
+
+.status-badge.devuelta {
+  background-color: #ffa500;
+}
+
+.status-badge.activa {
+  background-color: #4caf50;
+}
+
+.entrada-actions {
+  margin-top: 15px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.devolver-btn, .eliminar-btn, .qr-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s;
+  min-width: 120px;
+}
+
+.devolver-btn {
+  background-color: #ffa500;
+  color: white;
+}
+
+.devolver-btn:hover {
+  background-color: #e69500;
+}
+
+.eliminar-btn {
+  background-color: #ff4d4d;
+  color: white;
+}
+
+.eliminar-btn:hover {
+  background-color: #e60000;
+}
+
+.qr-btn {
+  background-color: #3498db;
+  color: white;
+}
+
+.qr-btn:hover {
+  background-color: #2980b9;
+}
+
+.qr-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.qr-modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.qr-container {
+  display: flex;
+  justify-content: center;
+  margin: 20px 0;
+}
+
+.close-qr-btn {
+  margin-top: 15px;
+  padding: 8px 16px;
+  background-color: #555;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.close-qr-btn:hover {
+  background-color: #333;
+}
+
+.status-badge.devuelta {
+  background-color: #ffa500;
+}
+
+.status-badge.activa {
+  background-color: #4caf50;
+}
